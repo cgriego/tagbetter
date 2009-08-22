@@ -9,8 +9,6 @@ set :scm,         "git"
 set :user,        'deploy'
 
 role :app, domain
-# role :web, domain
-# role :db,  domain, :primary => true
 
 namespace :deploy do
   
@@ -22,14 +20,15 @@ namespace :deploy do
     # Do nothing.
   end
 
-  desc "Restart Application"
+  desc "Restart application"
   task :restart, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
   end
   
-  desc "Update the Apache vhost config"
+  desc "Update the Apache virtual host for the application"
   task :update_vhost, :roles => :app do
-    puts "WRITE ME"
+    sudo "cp #{current_release}/config/tagbetter.conf /etc/apache2/sites-available/tagbetter.conf"
+    sudo 'apachectl graceful'
   end
   
 end
