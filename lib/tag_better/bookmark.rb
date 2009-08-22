@@ -1,6 +1,13 @@
-class Bookmark
+class TagBetter::Bookmark < CouchRest::ExtendedDocument
   
-  attr_accessor :username, :description, :title, :timestamp, :tags, :url
+  property :username
+  property :description
+  property :title
+  property :timestamp
+  property :tags
+  property :url
+  
+  view_by :username
   
   def self.from_feed(obj)
     returning new do |bookmark|

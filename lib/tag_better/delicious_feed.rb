@@ -1,7 +1,5 @@
-require 'json'
-require 'restclient'
 
-class DeliciousFeed
+class TagBetter::DeliciousFeed
   
   attr_accessor :username
   
@@ -16,7 +14,7 @@ class DeliciousFeed
   def bookmarks
     feed = RestClient.get("http://feeds.delicious.com/v2/json/#{username}")
     doc = JSON.load(feed)
-    doc.map { |obj| Bookmark.from_feed(obj) }
+    doc.map { |obj| TagBetter::Bookmark.from_feed(obj) }
   end
   
 end

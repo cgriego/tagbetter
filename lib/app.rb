@@ -1,6 +1,10 @@
 require 'sinatra'
 
-class TagBetter < Sinatra::Default
+class TagBetter::App < Sinatra::Base
+  
+  configure do
+    TagBetter.setup_database
+  end
   
   helpers do
     def json(body)
@@ -9,12 +13,12 @@ class TagBetter < Sinatra::Default
     end
   end
   
-  get '/' do
-    "We are rolling."
-  end
-  
   get '/:user/recent' do
     json ['Nothing here yet.']
+  end
+  
+  get '/test' do
+    'OK.'
   end
   
 end
