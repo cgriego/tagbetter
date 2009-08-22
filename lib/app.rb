@@ -9,6 +9,10 @@ class TagBetter < Sinatra::Default
     end
   end
   
+  get '/' do
+    "We are rolling."
+  end
+  
   get '/:user/recent' do
     json ['Nothing here yet.']
   end
