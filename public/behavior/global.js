@@ -16,8 +16,8 @@ TagBetter.App =
 	
 	// Tag-related constants
 	CLASSNAME_FOR_TAG_IN_BUNDLE:   'in-bundle',
-	CLASSNAME_FOR_TAG_ADDED:       'added',
-	CLASSNAME_FOR_TAG_REMOVED:     'removed',
+	CLASSNAME_FOR_TAG_ADDING:      'adding',
+	CLASSNAME_FOR_TAG_REMOVING:    'removing',
 	
 	ID_FOR_TAGS_LIST:              'tags',
 	
