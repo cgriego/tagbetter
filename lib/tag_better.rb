@@ -1,3 +1,5 @@
+require 'logger'
+
 require 'couchrest'
 require 'json'
 require 'nokogiri'
@@ -15,6 +17,12 @@ module TagBetter
   
   def self.userhash(username, password)
     Digest::SHA1.hexdigest("#{username + password}")
+  end
+  
+  def self.logger
+    @@logger ||= returning Logger.new('log/tagbetter.log') do |logger|
+      logger.level = Logger::DEBUG
+    end
   end
   
 end

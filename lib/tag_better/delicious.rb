@@ -25,7 +25,10 @@ class TagBetter::Delicious
   protected
   
   def self.fetch(path, username, password)
-    xml = RestClient.get("https://#{username}:#{password}@api.del.icio.us/v1/#{path}")
+    TagBetter.logger.info("Fetch: #{path} for #{username}")
+    
+    url = "https://#{username}:#{password}@api.del.icio.us/v1/#{path}"
+    xml = RestClient.get(url)
     Nokogiri.XML(xml)
   end
   

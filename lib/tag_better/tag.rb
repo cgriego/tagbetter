@@ -9,11 +9,12 @@ class TagBetter::Tag < CouchRest::ExtendedDocument
   def self.for(username, password)
     tags = by_userhash(:key => TagBetter.userhash(username, password))
     if tags.empty?
-      returning TagBetter::Delicious.tags_for(username, password) do |tag|
+      TagBetter.logger.info "Cache miss: #{username}/tags"
+      returning TagBetter::Delicious.tags_for(username, password) do |tags|
         database.bulk_save(tags)
       end
     else
-      tags
+      TagBetter.logger.info "Cache hit: #{username}/tags"
     end
   end
   

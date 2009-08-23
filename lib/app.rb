@@ -11,6 +11,7 @@ class TagBetter::App < Sinatra::Base
   post '/login' do
     session[:username] = params[:username]
     session[:password] = params[:password]
+    TagBetter.logger.info "Logged in #{params[:username]} with #{TagBetter.userhash(params[:username], params[:password])}"
     redirect '/tagbetter.html'
   end
   
