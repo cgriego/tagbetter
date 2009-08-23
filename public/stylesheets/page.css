@@ -149,17 +149,17 @@ small {
 	font-style: normal;
 }
 
-#tag-bundles li a.empty em {
+#tag-bundles li.empty a em {
 	border-color:     rgb(203,79,77); /* Chestnut Rose */
 	background-color: rgb(203,79,77); /* Chestnut Rose */
 }
 
-#tag-bundles li a.selected {
+#tag-bundles li.selected a {
 	color: white;
 	background-color: rgb(50,116,208); /* Mariner Blue */
 }
 
-#tag-bundles li a.selected em {
+#tag-bundles li.selected a em {
 	color:            black;
 	border-color:     white;
 	background-color: white;
