@@ -65,6 +65,9 @@ TagBetter.App =
 			* "Create Bundle" button
 				-- creates a stub bundle JS object into which one
 					can add/remove tags
+					
+			* "Forgot password" link
+				-- Do confirm() before sending along
 		*/
 		
 		// Check for a click in the bundles list
@@ -82,6 +85,15 @@ TagBetter.App =
 			this.setSelectedBundle(bundleName);
 			
 			event.preventDefault();
+			return;
+		}
+		
+		// Check for click in the tags list 
+		if ( $(event.target).parents('#' + this.ID_FOR_TAGS_LIST).length )
+		{
+			this.toggleTag( $(event.target).parents('li')[0] );
+			event.preventDefault();
+			return;
 		}
 		
 	},
@@ -125,9 +137,115 @@ TagBetter.App =
 		}
 	},
 	
+	/* This adds a given tag to the currently selected bundle:
+	
+		tag: [string]
+		listItemElement: [DOM Element]
+	*/
+	addTagToSelectedBundle: function(tag, listItemElement)
+	{
+		// Check if it already has the "adding" classname, just to be sure
+		if ( $(listItemElement).hasClass(this.CLASSNAME_FOR_TAG_ADDING))
+		{
+			// Note to self: If you want to be fancy about it, 
+			// you could try removing the tag once again at this point.
+			return;
+		}
+		
+		$(listItemElement).addClass(this.CLASSNAME_FOR_TAG_ADDING);
+		
+		this.currentlySelectedBundle.tags.push(tag);
+		
+		// Make sure it's still sorted
+		this.currentlySelectedBundle.tags.sort();
+		
+		var self = this;
+		TagBetter.Network.applyChanges(this.currentlySelectedBundle, function()
+		{
+			// This is the function that runs upon success of the Ajax call -- it
+			// removes the temporary "adding" class and adds on the "in-bundle" class
+			
+			$(listItemElement).removeClass(self.CLASSNAME_FOR_TAG_ADDING);
+			
+			$(listItemElement).addClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
+		});
+	},
+	
+	/* This removes a given tag from the currently selected bundle:
+	
+		tag: [string]
+		listItemElement: [DOM Element]
+	*/
+	removeTagFromSelectedBundle: function(tag, listItemElement)
+	{
+		// Check if it already has the "removing" classname, just to be sure
+		if ( $(listItemElement).hasClass(this.CLASSNAME_FOR_TAG_REMOVING))
+		{
+			// Note to self: If you want to be fancy about it, 
+			// you could try adding the tag back in at this point.
+			return;
+		}
+		
+		$(listItemElement).addClass(this.CLASSNAME_FOR_TAG_REMOVING);
+		
+		var newTagList = []; // initialize
+		
+		// Go through the currently selected bundle's tag list, and as you go,
+		// add those tags to the new tag list -- except if it's the tag we're removing
+		
+		for (var i=0, len = this.currentlySelectedBundle.tags; i < len; i++)
+		{
+			if (this.currentlySelectedBundle.tags[i] != tag)
+			{
+				newTagList.push( this.currentlySelectedBundle.tags[i] );
+			}
+		}
+		
+		this.currentlySelectedBundle.tags = newTagList;
+		
+		var self = this;
+		TagBetter.Network.applyChanges(this.currentlySelectedBundle, function()
+		{
+			// This is the function that runs upon success of the Ajax call -- it
+			// removes the temporary "adding" class and adds on the "in-bundle" class
+			
+			$(listItemElement).removeClass(self.CLASSNAME_FOR_TAG_ADDING);
+			
+			$(listItemElement).removeClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
+		});
+	},
+	
 	/* Tag bits
 	   ---------------------------------------------------------------- */
 	
+	/* 
+		This is fired after someone clicks on a tag:
+	
+	 	* If that tag is currently in the given bundle, it removes it
+		* If that tag isn't yet in the current bundle, it adds it
+	*/
+	toggleTag: function(listItemElement)
+	{
+		if (!this.currentlySelectedBundle)
+		{
+			return null;
+		}
+		
+		var tag = $(listItemElement).text();
+		
+		switch ( $(listItemElement).hasClass(this.CLASSNAME_FOR_TAG_IN_BUNDLE) )
+		{
+			// It's currently in the bundle, so let's remove it
+			case true:
+				this.removeTagFromSelectedBundle(tag, listItemElement);
+				break;
+		
+			// It's not yet in the bundle, so let's add it
+			case false:
+				this.addTagToSelectedBundle(tag, listItemElement);
+				break;
+		}
+	},
 	
 	/* Markup-building bits
 	   ---------------------------------------------------------------- */
