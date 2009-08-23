@@ -7,6 +7,7 @@ set :use_sudo,    false
 set :deploy_to,   "/apps/#{application}"
 set :scm,         "git"
 set :user,        'deploy'
+set :branch,      'railsrumble09'
 
 role :app, domain
 
