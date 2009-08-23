@@ -16,7 +16,8 @@
 		<h1>Tag Better</h1>
 		
 		<nav>
-			<a href="#">Logout</a>
+			<a href="/logout">Logout</a>
+			<a href="/forget" class="forget-link" title="This will force Tag Better to purge all of your data from our systems.">Delete My Account</a>
 		</nav>
 	</header>
 	<div id="content">
@@ -25,11 +26,13 @@
 				<h1>Tag Bundles</h1>
 			</header>
 			
-			<ol id="tag-bundles">
-				<li class="empty"><a href="#" ><em>0</em> Browsers</a></li>
-				<li class="selected"><a href="#"><em>500</em> People</a></li>
-				<li><a href="#"><em>20</em> Organizations</a></li>
-			</ol><!-- /#tag-bundles -->
+			<nav>
+				<ol id="tag-bundles">
+					<li><a href="#" class="empty"><em>0</em> Browsers</a></li>
+					<li><a href="#" class="selected"><em>500</em> People</a></li>
+					<li><a href="#"><em>20</em> Organizations</a></li>
+				</ol><!-- /#tag-bundles -->
+			</nav>
 			
 			<footer>
 				<form action="#" method="post" id="new-bundle-form">

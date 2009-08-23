@@ -24,15 +24,19 @@ body {
 form,
 p,
 ol,
-ul {
+ul,
+h1,
+hgroup {
 	margin-bottom: 21px;
 }
 
 h1 {
-	margin-bottom: 21px;
-	
 	font-size: 21px;
 	font-weight: bold;
+}
+
+hgroup h1 {
+	margin-bottom: 6px;
 }
 
 a:link,
@@ -102,6 +106,10 @@ small {
 	
 	font-size:   12px;
 	line-height: 24px;
+}
+
+#header nav a {
+	margin-left: 12px;
 }
 
 #secondary-content {
