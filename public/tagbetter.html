@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8" />
+	<title>Tag Better</title>
+	
+</head>
+<body>
+	<header>
+		<h1>Tag Better</h1>
+	</header>
+	<div id="content">
+		<section id="secondary-content">
+			<header>
+				<h1>Tag Bundles</h1>
+			</header>
+			
+			<ol id="tag-bundles">
+				<li><a href="#" class="selected">People <em>500</em></a></li>
+				<li><a href="#" class="empty">Browsers <em>0</em></a></li>
+			</ol><!-- /#tag-bundles -->
+			
+			<footer>
+				<form action="#" method="post" id="new-bundle">
+					<label for="new-bundle-name">Name</label>
+					<input type="text" id="new-bundle-name" name="name" />
+					<input type="submit" id="new-bundle-submit" value="Create Bundle" />
+				</form>
+			</footer>
+		</section><!-- /#secondary-content -->
+		
+		<section id="primary-content">
+			<header>
+				<h1>My Tags</h1>
+				
+				<form action="#" method="get" id="filter-tags">
+					<label for="filter-tags-q">Filter Tags:</label>
+					<input type="search" id="filter-tags-q" name="q" />
+				</form>
+			</header>
+			
+			<ul id="tags">
+				<li><a href="#" title="1 Bookmark">lorem</a></li>
+				<li><a href="#" title="20 Bookmarks" class="in-bundle">ipsum</a></li>
+				<li><a href="#" title="500 Bookmarks" class="in-bundle adding">dolor</a></li>
+				<li><a href="#" title="2 Bookmarks" class="removing">sit</a></li>
+				<li><a href="#" title="3 Bookmarks">amet</a></li>
+			</ul><!-- /#tags -->
+		</section><!-- /#primary-content -->
+	</div><!-- /#content -->
+</body>
+</html>
