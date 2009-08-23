@@ -1,9 +1,10 @@
 @charset "UTF-8";
 
 /*
-rgb(50,116,208) Mariner Blue
-rgb(210,210,210) Alto Gray
-rgb(203,79,77) Chestnut Rose
+* rgb(50,116,208) Mariner Blue
+* rgb(210,210,210) Alto Gray
+* rgb(203,79,77) Chestnut Rose
+* rgb(124,186,15) Lima
 */
 
 html {
@@ -104,7 +105,11 @@ small {
 }
 
 #secondary-content {
+	position: fixed;
 	float: left;
+	overflow: auto;
+	max-height: 90%;
+	
 	padding:  21px;
 	width:   258px;
 	
@@ -115,13 +120,17 @@ small {
 	display: block;
 }
 
+#tag-bundles {
+	margin-top: -6px;
+}
+
 #tag-bundles li {
 	margin: 0 -3px;
 }
 
 #tag-bundles li a {
 	display: block;
-	padding: 3px;
+	padding: 6px 3px;
 	
 	text-decoration: none;
 }
@@ -175,3 +184,31 @@ small {
 #primary-content header form {
 	float: right;
 }
+
+#tags {
+	clear: right;
+	
+	margin-left:  -6px;
+	margin-right: -6px;
+}
+
+#tags li {
+	display: inline;
+	line-height: 1.5;
+}
+
+#tags li a {
+	padding: 1px 6px;
+	
+	text-decoration: none;
+}
+
+#tags li a:hover,
+#tags li a:focus,
+#tags li a:active {
+	text-decoration: underline;
+}
+
+#tags li a.in-bundle { color: white; background-color: rgb(50,116,208); /* Mariner Blue */ }
+#tags li a.adding    { color: white; background-color: rgb(124,186,15); /* Lima */ }
+#tags li a.removing  { color: white; background-color: rgb(203,79,77); /* Chestnut Rose */ }
