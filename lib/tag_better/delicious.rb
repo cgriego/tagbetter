@@ -22,14 +22,26 @@ class TagBetter::Delicious
     end
   end
   
+  def self.update_bundle(bundle, username, password)
+    post('/tags/bundles/set', 
+      {:bundle => bundle['name'], :tags => bundle['tags']},
+      username, password)
+  end
+  
   protected
   
   def self.fetch(path, username, password)
     TagBetter.logger.info("Fetch: #{path} for #{username}")
     
-    url = "https://#{username}:#{password}@api.del.icio.us/v1/#{path}"
+    url = "https://#{username}:#{password}@api.del.icio.us/v1#{path}"
     xml = RestClient.get(url)
     Nokogiri.XML(xml)
+  end
+  
+  def self.post(path, args, username, password)
+    url = "https://#{username}:#{password}@api.del.icio.us/v1#{path}"
+    resp = Nokogiri.XML(RestClient.post(url, args))
+    resp.root.content == 'ok'
   end
   
 end

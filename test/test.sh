@@ -12,6 +12,7 @@
 
 source 'test/config'
 
+echo "\n===== Login ====="
 curl -i -c tmp/cookies.txt \
         -d username=$username \
         -d password=$password \
@@ -19,18 +20,28 @@ curl -i -c tmp/cookies.txt \
 
 sleep 1 # For delicious
 
-curl -b tmp/cookies.txt \
+echo "\n===== Bundles ====="
+curl -i -b tmp/cookies.txt \
      -H 'Accept: application/json' \
      http://$host/bundles
 
 sleep 1 # For delicious
 
-curl -b tmp/cookies.txt \
+echo "\n===== Tags ====="
+curl -i -b tmp/cookies.txt \
      -H 'Accept: application/json' \
      http://$host/tags
 
 sleep 1 # For delicious
 
-curl -b tmp/cookies.txt \
+echo "\n===== Search ====="
+curl -i -b tmp/cookies.txt \
      -H 'Accept: application/json' \
      http://$host/tags/search?q=css
+
+sleep 1 # For delicious
+
+echo "\n===== Update ====="
+curl -i -b tmp/cookies.txt \
+     -d '{"name": "plugtwo", "tags": ["ruby", "css"]}' \
+     http://$host/bundles

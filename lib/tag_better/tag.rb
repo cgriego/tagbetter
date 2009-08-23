@@ -15,6 +15,8 @@ class TagBetter::Tag < CouchRest::ExtendedDocument
       end
     else
       TagBetter.logger.info "Cache hit: #{username}/tags"
+      
+      tags
     end
   end
   

@@ -29,15 +29,26 @@ class TagBetter::App < Sinatra::Base
   end
   
   get '/bundles', :provides => 'application/json' do
-    TagBetter::Bundle.for(session[:username], session[:password]).to_json
+    {:bundles => TagBetter::Bundle.for(session[:username], session[:password])}.to_json
   end
   
   get '/tags', :provides => 'application/json' do
-    TagBetter::Tag.for(session[:username], session[:password]).to_json
+    {:tags => TagBetter::Tag.for(session[:username], session[:password])}.to_json
   end
   
   get '/tags/search', :provides => 'application/json' do
-    TagBetter::Tag.search(userhash, params[:q]).to_json
+    {:results => TagBetter::Tag.search(userhash, params[:q])}.to_json
+  end
+  
+  post '/bundles' do
+    bundle = JSON.load(request.body)
+    if TagBetter::Delicious.update_bundle(bundle, 
+         session[:username], 
+         session[:password])
+      status 202
+    else
+      status 400
+    end
   end
   
 end
