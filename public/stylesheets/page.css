@@ -24,13 +24,13 @@ form,
 p,
 ol,
 ul {
-	margin-bottom: 20px;
+	margin-bottom: 21px;
 }
 
 h1 {
-	margin-bottom: 20px;
+	margin-bottom: 21px;
 	
-	font-size: 20px;
+	font-size: 21px;
 	font-weight: bold;
 }
 
@@ -58,7 +58,7 @@ small {
 	color: white;
 	background-color: rgb(50,116,208); /* Mariner Blue */
 	
-	padding: 10px 20px;
+	padding: 9px 21px;
 }
 
 /*
@@ -105,8 +105,8 @@ small {
 
 #secondary-content {
 	float: left;
-	padding:  20px;
-	width:   260px;
+	padding:  21px;
+	width:   258px;
 	
 	background-color: rgb(210,210,210); /* Alto Gray */
 }
