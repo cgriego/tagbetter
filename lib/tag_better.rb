@@ -25,6 +25,16 @@ module TagBetter
     end
   end
   
+  def self.purge(userhash)
+    docs = [Bundle.by_userhash(:key => userhash),   
+            Tag.by_userhash(:key => userhash)].flatten
+    docs.each { |d| d.destroy }
+    # AKK: some day, bulk save (bug in couchrest?)
+    # database.bulk_delete
+    
+    logger.info("Purged #{userhash}")
+  end
+  
 end
 
 require 'tag_better/core_ext'

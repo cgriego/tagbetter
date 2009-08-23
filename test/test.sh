@@ -17,31 +17,37 @@ curl -i -c tmp/cookies.txt \
         -d username=$username \
         -d password=$password \
         http://$host/login
-
 sleep 1 # For delicious
 
 echo "\n===== Bundles ====="
 curl -i -b tmp/cookies.txt \
      -H 'Accept: application/json' \
      http://$host/bundles
-
 sleep 1 # For delicious
 
 echo "\n===== Tags ====="
 curl -i -b tmp/cookies.txt \
      -H 'Accept: application/json' \
      http://$host/tags
-
 sleep 1 # For delicious
 
 echo "\n===== Search ====="
 curl -i -b tmp/cookies.txt \
      -H 'Accept: application/json' \
      http://$host/tags/search?q=css
-
 sleep 1 # For delicious
 
 echo "\n===== Update ====="
 curl -i -b tmp/cookies.txt \
      -d '{"name": "plugtwo", "tags": ["ruby", "css"]}' \
      http://$host/bundles
+
+echo "\n===== Purge ====="
+curl -i -b tmp/cookies.txt \
+     -X POST \
+     http://$host/purge
+
+echo "\n===== Forget ====="
+curl -i -b tmp/cookies.txt \
+     -X POST \
+     http://$host/forget

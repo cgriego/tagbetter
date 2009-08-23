@@ -28,16 +28,13 @@ class TagBetter::App < Sinatra::Base
     redirect '/tagbetter.html'
   end
   
+  post '/forget' do
+    session.clear
+    redirect '/login'
+  end
+  
   get '/bundles', :provides => 'application/json' do
     {:bundles => TagBetter::Bundle.for(session[:username], session[:password])}.to_json
-  end
-  
-  get '/tags', :provides => 'application/json' do
-    {:tags => TagBetter::Tag.for(session[:username], session[:password])}.to_json
-  end
-  
-  get '/tags/search', :provides => 'application/json' do
-    {:results => TagBetter::Tag.search(userhash, params[:q])}.to_json
   end
   
   post '/bundles' do
@@ -49,6 +46,19 @@ class TagBetter::App < Sinatra::Base
     else
       status 400
     end
+  end
+  
+  get '/tags', :provides => 'application/json' do
+    {:tags => TagBetter::Tag.for(session[:username], session[:password])}.to_json
+  end
+  
+  get '/tags/search', :provides => 'application/json' do
+    {:results => TagBetter::Tag.search(userhash, params[:q])}.to_json
+  end
+  
+  post '/purge' do
+    TagBetter.purge(userhash)
+    status 204
   end
   
 end
