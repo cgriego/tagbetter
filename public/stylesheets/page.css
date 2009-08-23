@@ -229,6 +229,6 @@ small {
 	text-decoration: underline;
 }
 
-#tags li a.in-bundle { color: white; background-color: rgb(50,116,208); /* Mariner Blue */ }
-#tags li a.adding    { color: white; background-color: rgb(124,186,15); /* Lima */ }
-#tags li a.removing  { color: white; background-color: rgb(203,79,77); /* Chestnut Rose */ }
+#tags li.in-bundle a { color: white; background-color: rgb(50,116,208); /* Mariner Blue */ }
+#tags li.adding a    { color: white; background-color: rgb(124,186,15); /* Lima */ }
+#tags li.removing a  { color: white; background-color: rgb(203,79,77); /* Chestnut Rose */ }

@@ -243,7 +243,7 @@ TagBetter.App =
 			// This is the function that runs upon success of the Ajax call -- it
 			// removes the temporary "adding" class and adds on the "in-bundle" class
 			$(listItemElement)
-				.removeClass(self.CLASSNAME_FOR_TAG_ADDING)
+				.removeClass(self.CLASSNAME_FOR_TAG_REMOVING)
 				.removeClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
 				
 			self.updateTagCountOnSelectedBundle();
@@ -311,7 +311,7 @@ TagBetter.App =
 					break;
 			}
 			
-			tagListMarkup.push('<li><a class="' + className + '" href="#" title="' + currentTag.count + (currentTag.count==1 ? ' Bookmark">' : ' Bookmarks">') + currentTag.name + '</a></li>\n');
+			tagListMarkup.push('<li class="' + className + '"><a href="#" title="' + currentTag.count + (currentTag.count==1 ? ' Bookmark">' : ' Bookmarks">') + currentTag.name + '</a></li>\n');
 		}
 		
 		$('#' + this.ID_FOR_TAGS_LIST).html( tagListMarkup.join('') );
