@@ -163,11 +163,9 @@ TagBetter.App =
 	},
 	
 	updateTagCountOnSelectedBundle: function()
-	{
-		// This is kinda the brute force method and could be done 
-		// better in future
-		
-		this.buildBundleList();
+	{		
+		$('#' + this.ID_FOR_BUNDLES_LIST + ' li.' + this.CLASSNAME_FOR_SELECTED_BUNDLE)
+			.find('em').text(this.currentlySelectedBundle.tags.length);
 	},
 	
 	/* This adds a given tag to the currently selected bundle:
