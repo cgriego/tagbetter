@@ -3,6 +3,7 @@
 /*
 rgb(50,116,208) Mariner Blue
 rgb(210,210,210) Alto Gray
+rgb(203,79,77) Chestnut Rose
 */
 
 html {
@@ -112,6 +113,47 @@ small {
 
 #login-form label {
 	display: block;
+}
+
+#tag-bundles li {
+	margin: 0 -3px;
+}
+
+#tag-bundles li a {
+	display: block;
+	padding: 3px;
+	
+	text-decoration: none;
+}
+
+#tag-bundles li a em {
+	float: right;
+	padding: 0 6px;
+	
+	border: 1px solid rgb(50,116,208); /* Mariner Blue */
+	color: white;
+	background-color: rgb(50,116,208); /* Mariner Blue */
+	
+	-moz-border-radius:    12px;
+	-webkit-border-radius: 12px;
+	
+	font-style: normal;
+}
+
+#tag-bundles li a.empty em {
+	border-color:     rgb(203,79,77); /* Chestnut Rose */
+	background-color: rgb(203,79,77); /* Chestnut Rose */
+}
+
+#tag-bundles li a.selected {
+	color: white;
+	background-color: rgb(50,116,208); /* Mariner Blue */
+}
+
+#tag-bundles li a.selected em {
+	color:            black;
+	border-color:     white;
+	background-color: white;
 }
 
 #new-bundle-form label {
