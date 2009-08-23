@@ -170,7 +170,7 @@ TagBetter.App =
 
 TagBetter.Network = 
 {
-	mostRecentQuery: "", // initialize
+	mostRecentQuery: null, // initialize
 	
 	getBundles: function()
 	{
@@ -196,15 +196,20 @@ TagBetter.Network =
 	{
 		var data = {}; // initialize
 		
-		if (typeof query != "undefined" && query.length)
+		if (typeof query == "undefined")
 		{
-			if (query === this.mostRecentQuery)
-			{
-				return;
-			}
-			
-			this.mostRecentQuery = query;
-			
+			query = "";
+		}
+		
+		if (query === this.mostRecentQuery)
+		{
+			return;
+		}
+		
+		this.mostRecentQuery = query;
+		
+		if (query.length)
+		{	
 			var data =
 			{
 				q: query
