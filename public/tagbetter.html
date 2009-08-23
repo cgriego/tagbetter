@@ -4,10 +4,17 @@
 	<meta charset="UTF-8" />
 	<title>Tag Better</title>
 	
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/html5.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/reset.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/page.css" />
 </head>
 <body>
-	<header>
+	<header id="header">
 		<h1>Tag Better</h1>
+		
+		<nav>
+			<a href="#">Logout</a>
+		</nav>
 	</header>
 	<div id="content">
 		<section id="secondary-content">
@@ -21,7 +28,7 @@
 			</ol><!-- /#tag-bundles -->
 			
 			<footer>
-				<form action="#" method="post" id="new-bundle">
+				<form action="#" method="post" id="new-bundle-form">
 					<label for="new-bundle-name">Name</label>
 					<input type="text" id="new-bundle-name" name="name" />
 					<input type="submit" id="new-bundle-submit" value="Create Bundle" />
@@ -31,15 +38,20 @@
 		
 		<section id="primary-content">
 			<header>
-				<h1>My Tags</h1>
-				
 				<form action="#" method="get" id="filter-tags">
 					<label for="filter-tags-q">Filter Tags:</label>
 					<input type="search" id="filter-tags-q" name="q" />
 				</form>
+				
+				<h1>My Tags</h1>
 			</header>
 			
 			<ul id="tags">
+				<li><a href="#" title="1 Bookmark">lorem</a></li>
+				<li><a href="#" title="20 Bookmarks" class="in-bundle">ipsum</a></li>
+				<li><a href="#" title="500 Bookmarks" class="in-bundle adding">dolor</a></li>
+				<li><a href="#" title="2 Bookmarks" class="removing">sit</a></li>
+				<li><a href="#" title="3 Bookmarks">amet</a></li>
 				<li><a href="#" title="1 Bookmark">lorem</a></li>
 				<li><a href="#" title="20 Bookmarks" class="in-bundle">ipsum</a></li>
 				<li><a href="#" title="500 Bookmarks" class="in-bundle adding">dolor</a></li>

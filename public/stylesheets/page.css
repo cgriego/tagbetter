@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+/*
+rgb(50,116,208) Mariner Blue
+rgb(210,210,210) Alto Gray
+*/
+
+html {
+	color: black;
+	background-color: white;
+	background-image: url(/images/secondary-content.gif);
+	background-repeat: repeat-y;
+	
+	font-size: 100%;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+	background-color: transparent;
+}
+
+form,
+ol,
+ul {
+	margin-bottom: 20px;
+}
+
+h1 {
+	margin-bottom: 20px;
+	
+	font-weight: bold;
+}
+
+a:link,
+a:visited {
+	color: rgb(50,116,208); /* Mariner Blue */
+}
+
+a:focus,
+a:hover,
+a:active {
+	color: black;
+	
+	outline: 1px dotted black;
+}
+
+small {
+	font-size: 12px;
+}
+
+#header {
+	color: white;
+	background-color: rgb(50,116,208); /* Mariner Blue */
+	
+	padding: 10px 20px;
+}
+
+/*
+	Easy Clearing - Tony Aslett, Position is Everything, and Alex Robinson
+	http://www.tanfa.co.uk/archives/show.asp?var=300
+*/
+#header { zoom: 1; }
+#header:after {
+	content: ".";
+	display: block;
+	visibility: hidden;
+	
+	clear: both;
+	
+	height:      0;
+	line-height: 0;
+	font-size:   1px;
+}
+
+#header a:link,
+#header a:visited {
+	color: white;
+}
+
+#header h1 {
+	float: left;
+	margin-bottom: 0;
+	
+	font-size: 24px;
+}
+
+#header nav {
+	float: right;
+	
+	font-size:   12px;
+	line-height: 24px;
+}
+
+#secondary-content {
+	float: left;
+	padding:  20px;
+	width:   260px;
+	
+	background-color: rgb(210,210,210); /* Alto Gray */
+}
+
+#login-form label {
+	display: block;
+}
+
+#new-bundle-form label {
+	/*
+		Aural Text Class - Peter Krantz
+		http://www.standards-schmandards.com/index.php?2004/10/08/1-the-aural-text-class
+	*/
+	
+	position: absolute;
+	top:      0; /* for IE 8 */
+	left: -1000em;
+}
+
+#primary-content {
+	margin-left: 300px;
+	padding: 20px;
+}
+
+#primary-content header form {
+	float: right;
+}

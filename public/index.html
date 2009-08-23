@@ -4,9 +4,12 @@
 	<meta charset="UTF-8" />
 	<title>Tag Better</title>
 	
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/html5.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/reset.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/page.css" />
 </head>
 <body>
-	<header>
+	<header id="header">
 		<h1>Tag Better</h1>
 	</header>
 	<div id="content">
@@ -15,13 +18,13 @@
 				<h1>Sign In</h1>
 			</header>
 			
-			<form action="/login" method="post">
+			<form action="/login" method="post" id="login-form">
 				<label for="username">Delicious Username</label>
 				<input id="username" type="text" />
 				<label for="password">Delicious Password</label>
 				<input id="password" type="password" />
 				<input type="submit" value="Sign In" />
-			</form>
+			</form><!-- /#login-form -->
 			
 			<a href="https://secure.delicious.com/newpw/username_or_email">Forgot your password?</a>
 			
