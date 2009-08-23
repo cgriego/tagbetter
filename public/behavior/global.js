@@ -135,15 +135,11 @@ TagBetter.App =
 		
 		this.keyEventTimeout = window.setTimeout(function()
 		{
-			self.sendFilterQuery(query);
+			TagBetter.Network.getTags(query);
 		}, this.IDLE_KEYPRESS_TIME_BEFORE_RUNNING_QUERY);
 	
 	},
-	
-		sendFilterQuery: function(query)
-		{
-			TagBetter.Network.getTags(query);
-		},
+
 
 	/* Bundle bits
 	   ---------------------------------------------------------------- */
