@@ -20,4 +20,9 @@ class TagBetter::Bundle < CouchRest::ExtendedDocument
     end
   end
   
+  def self.clear(userhash)
+    TagBetter.logger.info "Clear: #{userhash}/bundles"
+    by_userhash(:key => userhash).each { |b| b.destroy }
+  end
+  
 end

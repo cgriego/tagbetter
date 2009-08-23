@@ -42,6 +42,7 @@ class TagBetter::App < Sinatra::Base
     if TagBetter::Delicious.update_bundle(bundle, 
          session[:username], 
          session[:password])
+      TagBetter::Bundle.clear(userhash)
       status 202
     else
       status 400
