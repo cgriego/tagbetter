@@ -58,14 +58,14 @@ TagBetter.App =
 		/* 
 			List of elements on which clicks do stuff:
 			
-			* Tag Bundle 
+			* Tag Bundle [DONE]
 				-- makes it selected
 				
-			* Tag 
+			* Tag [DONE] 
 				-- toggles it between in-bundle and not-in-bundle, 
 					as long as a Tag Bundle is selected
 					
-			* "Create Bundle" button
+			* "Create Bundle" button 
 				-- creates a stub bundle JS object into which one
 					can add/remove tags
 					
@@ -162,6 +162,14 @@ TagBetter.App =
 		}
 	},
 	
+	updateTagCountOnSelectedBundle: function()
+	{
+		// This is kinda the brute force method and could be done 
+		// better in future
+		
+		this.buildBundleList();
+	},
+	
 	/* This adds a given tag to the currently selected bundle:
 	
 		tag: [string]
@@ -192,6 +200,8 @@ TagBetter.App =
 			$(listItemElement)
 				.removeClass(self.CLASSNAME_FOR_TAG_ADDING)
 				.addClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
+				
+			self.updateTagCountOnSelectedBundle();
 		});
 	},
 	
@@ -235,6 +245,8 @@ TagBetter.App =
 			$(listItemElement)
 				.removeClass(self.CLASSNAME_FOR_TAG_ADDING)
 				.removeClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
+				
+			self.updateTagCountOnSelectedBundle();
 		});
 	},
 	
