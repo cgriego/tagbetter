@@ -17,7 +17,6 @@ end
 
 require 'tag_better/core_ext'
 require 'tag_better/delicious'
-require 'tag_better/delicious_feed'
 require 'tag_better/bookmark'
 require 'tag_better/bundle'
 require 'tag_better/tag'
