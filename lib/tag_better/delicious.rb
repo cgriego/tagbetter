@@ -6,7 +6,7 @@ class TagBetter::Delicious
       returning TagBetter::Bundle.new do |bundle|
         bundle.userhash = TagBetter.userhash(username, password)
         bundle.name = n['name']
-        bundle.tags = n['tags']
+        bundle.tags = n['tags'].split(' ')
       end
     end
   end

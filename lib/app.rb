@@ -49,7 +49,9 @@ class TagBetter::App < Sinatra::Base
   end
   
   get '/tags', :provides => 'application/json' do
-    {:tags => TagBetter::Tag.for(session[:username], session[:password])}.to_json
+    tags = TagBetter::Tag.for(session[:username], session[:password])
+    tags = tags.sort_by { |t| t.name.downcase }
+    {:tags => tags}.to_json
   end
   
   get '/tags/search', :provides => 'application/json' do
