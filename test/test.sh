@@ -21,16 +21,16 @@ sleep 1 # For delicious
 
 curl -b tmp/cookies.txt \
      -H 'Accept: application/json' \
-     http://$host/$username/bundles
+     http://$host/bundles
 
 sleep 1 # For delicious
 
 curl -b tmp/cookies.txt \
      -H 'Accept: application/json' \
-     http://$host/$username/tags
+     http://$host/tags
 
 sleep 1 # For delicious
 
 curl -b tmp/cookies.txt \
      -H 'Accept: application/json' \
-     http://$host/$username/tags/search?q=css
+     http://$host/tags/search?q=css

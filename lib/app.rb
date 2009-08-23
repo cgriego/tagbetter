@@ -28,15 +28,15 @@ class TagBetter::App < Sinatra::Base
     redirect '/tagbetter.html'
   end
   
-  get '/:username/bundles', :provides => 'application/json' do
-    TagBetter::Bundle.for(params[:username], session[:password]).to_json
+  get '/bundles', :provides => 'application/json' do
+    TagBetter::Bundle.for(session[:username], session[:password]).to_json
   end
   
-  get '/:username/tags', :provides => 'application/json' do
-    TagBetter::Tag.for(params[:username], session[:password]).to_json
+  get '/tags', :provides => 'application/json' do
+    TagBetter::Tag.for(session[:username], session[:password]).to_json
   end
   
-  get '/:username/tags/search', :provides => 'application/json' do
+  get '/tags/search', :provides => 'application/json' do
     TagBetter::Tag.search(userhash, params[:q]).to_json
   end
   
