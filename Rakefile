@@ -18,3 +18,12 @@ namespace :couchdb do
   end
   
 end
+
+namespace :tagbetter do
+  
+  desc "Install gem dependencies"
+  task :gems do
+    gem_deps = %w{couchrest json rest-client sinatra}
+    sh "sudo gem install --no-ri --no-rdoc #{gem_deps.join(' ')}"
+  end
+end
