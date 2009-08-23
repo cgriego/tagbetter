@@ -30,6 +30,10 @@ hgroup {
 	margin-bottom: 21px;
 }
 
+p {
+	line-height: 1.25;
+}
+
 h1 {
 	font-size: 21px;
 	font-weight: bold;
@@ -136,6 +140,10 @@ small {
 	margin: 0 -3px;
 }
 
+#tag-bundles li.loading {
+	margin: 0;
+}
+
 #tag-bundles li a {
 	display: block;
 	padding: 6px 3px;
@@ -203,6 +211,10 @@ small {
 #tags li {
 	display: inline;
 	line-height: 1.5;
+}
+
+#tags li.loading {
+	padding: 1px 6px;
 }
 
 #tags li a {

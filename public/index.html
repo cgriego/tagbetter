@@ -20,9 +20,9 @@
 			
 			<form action="/login" method="post" id="login-form">
 				<label for="username">Delicious Username</label>
-				<input id="username" type="text" />
+				<input id="username" type="text" name="username" />
 				<label for="password">Delicious Password</label>
-				<input id="password" type="password" />
+				<input id="password" type="password" name="password" />
 				<input type="submit" value="Sign In" />
 			</form><!-- /#login-form -->
 			
@@ -42,15 +42,15 @@
 			<section>
 				<header><h1>Tag Bundles</h1></header>
 				
-				<p>Create and manage tag bundles.</p>
-				<p>Filter your tag list using powerful live search.</p>
+				<p>If you’re like us, then you have hundreds or thousands of tags. Using Tag Better, you can work tag-by-tag or bundle-by-bundle for a flexible workflow.</p>
+				<p>Still too many tags? Use our powerful live search to filter your tag list down to a manageable size. Use simple string matching or powerful regular expressions.</p>
 			</section>
 			
 			<section>
 				<header><h1>Security</h1></header>
 				
-				<p>Login with your delicious account.</p>
-				<p>At any time, you can delete your Tag Better account which will purge all of your data from our systems.</p>
+				<p>Getting started with Tag Better is easy, just login with your delicious account. Your credentials are never saved on our server and your data is cached for a limited time only.</p>
+				<p>At any time, you can delete your Tag Better account which will purge all of your data from Tag Better’s systems.</p>
 			</section>
 		</section><!-- /#primary-content -->
 	</div><!-- /#content -->
@@ -60,10 +60,8 @@
 	<script type="text/javascript">
 		TagBetter_Config = 
 		{
-			getBundlesURI:  "/bundles.json",
-			getTagsURI:     "/tags.json",
-			
-			postBundlesURI: "http://blah-blah",
+			bundlesURI:  "/bundles",
+			tagsURI:     "/tags",
 		}
 	</script>
 	

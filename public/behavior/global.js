@@ -121,6 +121,7 @@ TagBetter.App =
 		else
 		{
 			/* TO DO */
+			return false;
 		}
 	},
 	
@@ -255,6 +256,7 @@ TagBetter.App =
 	buildTagList: function()
 	{
 		var tagListMarkup = []; // initialize
+		var className;
 		
 		for (var i=0, len = this.viewableTags.length; i < len; i++)
 		{
@@ -264,18 +266,18 @@ TagBetter.App =
 				<li><a href="#" title="1 Bookmark">lorem</a></li>
 			*/
 			
-			switch ( this.isTagInSelectedBundle(currentTag.tag) )
+			switch ( this.isTagInSelectedBundle(currentTag.name) )
 			{
 				case true:
-					var className = this.CLASSNAME_FOR_TAG_IN_BUNDLE;
+					className = this.CLASSNAME_FOR_TAG_IN_BUNDLE;
 					break;
 				
 				case false:
-					var className = "";
+					className = "";
 					break;
 			}
 			
-			tagListMarkup.push('<li><a class="' + className + '" href="#" title="' + currentTag.count + ' Bookmark">' + currentTag.tag + '</a></li>\n');
+			tagListMarkup.push('<li><a class="' + className + '" href="#" title="' + currentTag.count + ' Bookmark">' + currentTag.name + '</a></li>\n');
 		}
 		
 		$('#' + this.ID_FOR_TAGS_LIST).html( tagListMarkup.join('') );
@@ -290,6 +292,7 @@ TagBetter.App =
 		for (var i=0, len = this.bundles.length; i < len; i++)
 		{
 			var currentBundle = this.bundles[i]; // cache this lookup
+			var className;
 			
 			/* Example markup that we're creating:
 				<li><a href="#" class="selected">People <em>500</em></a></li>
@@ -300,11 +303,11 @@ TagBetter.App =
 			switch ( tagCount )
 			{
 				case 0:
-					var className = this.CLASSNAME_FOR_EMPTY_BUNDLE;
+					className = this.CLASSNAME_FOR_EMPTY_BUNDLE;
 					break;
 				
 				default:
-					var className = "";
+					className = "";
 					break;
 			}
 			
@@ -327,11 +330,11 @@ TagBetter.Network =
 			type:     'GET',
 			cache:    'false',
 			dataType: 'json',
-			url:       TagBetter_Config.getBundlesURI,
+			url:       TagBetter_Config.bundlesURI,
 			success:   function(jsonResult)
 			{
 				if (jsonResult.bundles)
-				{	
+				{
 					TagBetter.App.bundles = jsonResult.bundles;
 					
 					TagBetter.App.buildBundleList();
@@ -357,8 +360,8 @@ TagBetter.Network =
 		this.mostRecentQuery = query;
 		
 		if (query.length)
-		{	
-			var data =
+		{
+			data =
 			{
 				q: query
 			};
@@ -370,7 +373,7 @@ TagBetter.Network =
 			cache:    'false',
 			dataType: 'json',
 			data:      data,
-			url:       TagBetter_Config.getTagsURI,
+			url:       TagBetter_Config.tagsURI,
 			success:   function(jsonResult)
 			{
 				if (jsonResult.tags)
@@ -391,9 +394,35 @@ TagBetter.Network =
 		
 	},
 	
-	applyChanges: function()
+	applyChanges: function(bundle, callback)
 	{
+		var data = '';
 		
+		data += '{';
+		data += '"name": "' + bundle.name.replace('"', '\"') + '"';
+		
+		if (bundle.tags.length) {
+			data += ', "tags": [';
+			bundleTags = bundle.tags.split(" ");
+			tags = [];
+			
+			for (var i = bundleTags.length - 1; i >= 0; i--){
+				tags.push('\"' + bundleTags[i].replace('"', '\"') + '\"');
+			};
+			
+			data += tags.join(', ');
+			data += ']';
+		}
+		
+		data += '}';
+		
+		$.ajax(
+		{
+			type:    'POST',
+			data:    data,
+			url:     TagBetter_Config.bundlesURI,
+			success: callback
+		});
 	}
 	
 };
