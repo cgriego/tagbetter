@@ -123,6 +123,8 @@ TagBetter.App =
 				-- when a key is typed, does a lookup 
 					on the query that's in the search box
 		*/
+		
+		TagBetter.Network.getTags($.trim(event.target.value));
 	},
 
 	/* Bundle bits
@@ -309,7 +311,7 @@ TagBetter.App =
 					break;
 			}
 			
-			tagListMarkup.push('<li><a class="' + className + '" href="#" title="' + currentTag.count + ' Bookmark">' + currentTag.name + '</a></li>\n');
+			tagListMarkup.push('<li><a class="' + className + '" href="#" title="' + currentTag.count + (currentTag.count==1 ? ' Bookmark">' : ' Bookmarks">') + currentTag.name + '</a></li>\n');
 		}
 		
 		$('#' + this.ID_FOR_TAGS_LIST).html( tagListMarkup.join('') );
@@ -417,7 +419,7 @@ TagBetter.Network =
 			cache:    'false',
 			dataType: 'json',
 			data:      data,
-			url:       TagBetter_Config.tagsURI,
+			url:       (query.length) ? TagBetter_Config.searchTagsURI : TagBetter_Config.tagsURI,
 			success:   function(jsonResult)
 			{
 				if (jsonResult.tags)
