@@ -449,11 +449,10 @@ TagBetter.Network =
 		
 		if (bundle.tags.length) {
 			data += ', "tags": [';
-			bundleTags = bundle.tags.split(" ");
 			tags = [];
 			
-			for (var i = bundleTags.length - 1; i >= 0; i--){
-				tags.push('\"' + bundleTags[i].replace('"', '\"') + '\"');
+			for (var i = bundle.tags.length - 1; i >= 0; i--){
+				tags.push('\"' + bundle.tags[i].replace('"', '\"') + '\"');
 			};
 			
 			data += tags.join(', ');
