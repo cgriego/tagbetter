@@ -21,6 +21,9 @@ TagBetter.App =
 	
 	ID_FOR_TAGS_LIST:              'tags',
 	
+	ID_FOR_LOGOUT:                 'logout',
+	ID_FOR_FORGET:                 'forget',
+	
 	/*
 		Example object within this array:
 		{name: "name here", tags: ['tag1', 'tag2'] }
@@ -96,6 +99,19 @@ TagBetter.App =
 			return;
 		}
 		
+		if ( event.target.id == this.ID_FOR_LOGOUT )
+		{
+		  this.logout();
+		  event.preventDefault();
+		  return;
+		}
+		
+		if ( event.target.id == this.ID_FOR_FORGET )
+		{
+		  this.forget();
+		  event.preventDefault();
+		  return;
+		}
 	},
 	
 	processKeyEvents: function(event)
@@ -321,8 +337,20 @@ TagBetter.App =
 		}
 		
 		$('#' + this.ID_FOR_BUNDLES_LIST).html( bundleListMarkup.join('') );
-	}
+	},
 	
+	logout: function() 
+	{
+    $('body').append("<form id='forget' method='POST' action='/forget'></form>");
+    $('#forget')[0].submit();
+    return;
+	},
+	
+	forget: function() {
+	  $('body').append("<form id='purge' method='POST' action='/purge'></form>");
+    $('#purge')[0].submit();
+    return;
+	}
 };
 
 TagBetter.Network = 

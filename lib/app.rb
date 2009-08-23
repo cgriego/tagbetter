@@ -30,7 +30,7 @@ class TagBetter::App < Sinatra::Base
   
   post '/forget' do
     session.clear
-    redirect '/login'
+    redirect '/'
   end
   
   get '/bundles', :provides => 'application/json' do
@@ -61,7 +61,8 @@ class TagBetter::App < Sinatra::Base
   
   post '/purge' do
     TagBetter.purge(userhash)
-    status 204
+    session.clear
+    redirect '/'
   end
   
 end
