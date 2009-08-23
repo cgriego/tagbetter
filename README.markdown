@@ -33,5 +33,15 @@ Run the application:
 
 ## Hacking
 
+In general:
+
 * Assets are served out of public. Anything within that directory is served from the root of the web app.
 * If you need to modify the application code, you'll want to touch `tmp/always_restart.txt`. This tells Passenger to restart the application on every request. You may notice a slight performance hit in doing so.
+* Run a console in the app environment: `irb -Ilib -rubygems -rtag_better`. You'll need to call `TagBetter.init` if you want to poke around in the database models.
+
+
+Testing via Curl:
+
+* Login: `curl -i -c tmp/cookies.txt -d username='USERNAME' -d password='PASSWORD' 'http://tagbetter.local/login'`
+* Fetch bundles: `curl -b tmp/cookies.txt -H 'Accept: application/json' http://tagbetter.local/USERNAME/bundles`
+* Fetch tags: `curl -b tmp/cookies.txt -H 'Accept: application/json' http://tagbetter.local/USERNAME/tags`

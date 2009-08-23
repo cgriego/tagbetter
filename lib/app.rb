@@ -18,4 +18,8 @@ class TagBetter::App < Sinatra::Base
     TagBetter::Bundle.for(params[:username], session[:password]).to_json
   end
   
+  get '/:username/tags', :provides => 'application/json' do
+    TagBetter::Tag.for(params[:username], session[:password]).to_json
+  end
+  
 end

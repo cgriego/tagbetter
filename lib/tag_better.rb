@@ -20,10 +20,13 @@ require 'tag_better/delicious'
 require 'tag_better/delicious_feed'
 require 'tag_better/bookmark'
 require 'tag_better/bundle'
+require 'tag_better/tag'
 
 module TagBetter
   
-  MODELS = [TagBetter::Bookmark, TagBetter::Bundle]
+  MODELS = [TagBetter::Bookmark, 
+            TagBetter::Bundle,
+            TagBetter::Tag]
   def self.setup_database
     MODELS.each { |m| m.use_database(database) }
   end
