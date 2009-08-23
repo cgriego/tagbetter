@@ -67,6 +67,23 @@ TagBetter.App =
 					can add/remove tags
 		*/
 		
+		// Check for a click in the bundles list
+		if ( $(event.target).parents('#' + this.ID_FOR_BUNDLES_LIST).length )
+		{
+			// Grab the list item of the selected bundle
+			
+			$(event.target).parents('li')
+				.addClass(this.CLASSNAME_FOR_SELECTED_BUNDLE)
+				.siblings().removeClass(this.CLASSNAME_FOR_SELECTED_BUNDLE);
+				
+			var bundleName = $(event.target).parents('li')
+				.children('span').html();
+				
+			this.setSelectedBundle(bundleName);
+			
+			event.preventDefault();
+		}
+		
 	},
 	
 	processKeyEvents: function(event)
@@ -92,6 +109,19 @@ TagBetter.App =
 		else
 		{
 			/* TO DO */
+		}
+	},
+	
+	setSelectedBundle: function(bundleName)
+	{
+		for (var i=0, len = this.bundles.length; i < len; i++)
+		{
+			if (this.bundles[i].name == bundleName)
+			{
+				this.currentlySelectedBundle = this.bundles[i];
+				this.buildTagList();
+				return;
+			}
 		}
 	},
 	
@@ -160,7 +190,7 @@ TagBetter.App =
 					break;
 			}
 			
-			bundleListMarkup.push('<li><a class="' + className + '" href="#">' + currentBundle.name + ' <em>' + tagCount + '</em></a></li>\n');
+			bundleListMarkup.push('<li><a class="' + className + '" href="#"><span>' + currentBundle.name + '</span> <em>' + tagCount + '</em></a></li>\n');
 		}
 		
 		$('#' + this.ID_FOR_BUNDLES_LIST).html( bundleListMarkup.join('') );
