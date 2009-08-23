@@ -24,7 +24,7 @@ class TagBetter::Delicious
   
   def self.update_bundle(bundle, username, password)
     post('/tags/bundles/set', 
-      {:bundle => bundle['name'], :tags => bundle['tags']},
+      {:bundle => bundle['name'], :tags => bundle['tags'].join(' ')},
       username, password)
   end
   
@@ -39,6 +39,8 @@ class TagBetter::Delicious
   end
   
   def self.post(path, args, username, password)
+    TagBetter.logger.info("Post: #{path} with #{args.inspect} for #{username}")
+    
     url = "https://#{username}:#{password}@api.del.icio.us/v1#{path}"
     resp = Nokogiri.XML(RestClient.post(url, args))
     resp.root.content == 'ok'
