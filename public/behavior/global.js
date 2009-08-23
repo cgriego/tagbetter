@@ -119,8 +119,16 @@ TagBetter.App =
 			return false;
 		}
 		else
-		{
-			/* TO DO */
+		{			
+			for (var i=0, len = this.currentlySelectedBundle.tags.length; i < len; i++)
+			{
+				if (this.currentlySelectedBundle.tags[i] == tag)
+				{
+					return true;
+				}
+			}
+			
+			/* If it got this far, then it must not have found the tag within the bundle */
 			return false;
 		}
 	},
@@ -165,10 +173,9 @@ TagBetter.App =
 		{
 			// This is the function that runs upon success of the Ajax call -- it
 			// removes the temporary "adding" class and adds on the "in-bundle" class
-			
-			$(listItemElement).removeClass(self.CLASSNAME_FOR_TAG_ADDING);
-			
-			$(listItemElement).addClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
+			$(listItemElement)
+				.removeClass(self.CLASSNAME_FOR_TAG_ADDING)
+				.addClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
 		});
 	},
 	
@@ -194,7 +201,7 @@ TagBetter.App =
 		// Go through the currently selected bundle's tag list, and as you go,
 		// add those tags to the new tag list -- except if it's the tag we're removing
 		
-		for (var i=0, len = this.currentlySelectedBundle.tags; i < len; i++)
+		for (var i=0, len = this.currentlySelectedBundle.tags.length; i < len; i++)
 		{
 			if (this.currentlySelectedBundle.tags[i] != tag)
 			{
@@ -209,10 +216,9 @@ TagBetter.App =
 		{
 			// This is the function that runs upon success of the Ajax call -- it
 			// removes the temporary "adding" class and adds on the "in-bundle" class
-			
-			$(listItemElement).removeClass(self.CLASSNAME_FOR_TAG_ADDING);
-			
-			$(listItemElement).removeClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
+			$(listItemElement)
+				.removeClass(self.CLASSNAME_FOR_TAG_ADDING)
+				.removeClass(self.CLASSNAME_FOR_TAG_IN_BUNDLE);
 		});
 	},
 	
