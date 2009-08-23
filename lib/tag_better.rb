@@ -13,6 +13,10 @@ module TagBetter
     CouchRest::Server.new
   end
   
+  def self.userhash(username, password)
+    Digest::SHA1.hexdigest("#{username + password}")
+  end
+  
 end
 
 require 'tag_better/core_ext'
@@ -23,7 +27,7 @@ require 'tag_better/tag'
 
 module TagBetter
   
-  MODELS = [TagBetter::Bookmark, 
+  MODELS = [TagBetter::Bookmark,
             TagBetter::Bundle,
             TagBetter::Tag]
   def self.setup_database

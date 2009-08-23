@@ -1,13 +1,13 @@
 class TagBetter::Tag < CouchRest::ExtendedDocument
   
-  property :username
+  property :userhash
   property :name
   property :count
   
-  view_by :username
+  view_by :userhash
   
   def self.for(username, password)
-    tags = by_username(:key => username)
+    tags = by_userhash(:key => TagBetter.userhash(username, password))
     if tags.empty?
       returning TagBetter::Delicious.tags_for(username, password) do |tag|
         database.bulk_save(tags)

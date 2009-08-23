@@ -1,13 +1,13 @@
 class TagBetter::Bundle < CouchRest::ExtendedDocument
   
-  property :username
+  property :userhash
   property :name
   property :tags
   
-  view_by :username
+  view_by :userhash
   
   def self.for(username, password)
-    bundles = by_username(:key => username)
+    bundles = by_userhash(:key => TagBetter.userhash(username, password))
     if bundles.empty?
       returning TagBetter::Delicious.bundles_for(username, password) do |bundles|
         database.bulk_save(bundles)
