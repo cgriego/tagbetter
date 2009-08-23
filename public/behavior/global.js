@@ -80,8 +80,8 @@ TagBetter.App =
 				.siblings().removeClass(this.CLASSNAME_FOR_SELECTED_BUNDLE);
 				
 			var bundleName = $(event.target).parents('li')
-				.children('span').html();
-				
+				.find('span').text();
+								
 			this.setSelectedBundle(bundleName);
 			
 			event.preventDefault();
@@ -134,7 +134,7 @@ TagBetter.App =
 	},
 	
 	setSelectedBundle: function(bundleName)
-	{
+	{	
 		for (var i=0, len = this.bundles.length; i < len; i++)
 		{
 			if (this.bundles[i].name == bundleName)
