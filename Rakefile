@@ -1,5 +1,21 @@
-$LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
-require 'tag_better'
+namespace :tagbetter do
+  
+  desc "Install gem dependencies"
+  task :gems do
+    gem_deps = %w{couchrest json rest-client sinatra nokogiri}
+    sh "sudo gem install --no-ri --no-rdoc #{gem_deps.join(' ')}"
+  end
+end
+
+begin
+  
+  $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
+  require 'tag_better'
+  
+rescue LoadError => e
+  puts "Missing dependencies. `rake tagbetter:gems` to install them."
+  exit
+end
 
 namespace :couchdb do
   
@@ -19,11 +35,3 @@ namespace :couchdb do
   
 end
 
-namespace :tagbetter do
-  
-  desc "Install gem dependencies"
-  task :gems do
-    gem_deps = %w{couchrest json rest-client sinatra}
-    sh "sudo gem install --no-ri --no-rdoc #{gem_deps.join(' ')}"
-  end
-end

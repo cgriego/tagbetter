@@ -25,10 +25,24 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt"
   end
   
+end
+
+namespace :tagbetter do
+  
   desc "Update the Apache virtual host for the application"
   task :update_vhost, :roles => :app do
     sudo "cp #{current_release}/config/tagbetter.conf /etc/apache2/sites-available/tagbetter"
     sudo '/etc/init.d/apache2 reload'
+  end
+  
+  desc "Install gem dependencies"
+  task :gems, :roles => :app do
+    run "cd #{current_release} && rake tagbetter:gems"
+  end
+  
+  desc "Create the CouchDB application database"
+  task :create_db, :roles => :app do
+    run "cd #{current_release} && rake couchdb:create"
   end
   
 end
