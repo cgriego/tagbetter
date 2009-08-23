@@ -18,4 +18,8 @@ class TagBetter::Tag < CouchRest::ExtendedDocument
     end
   end
   
+  def self.search(userhash, query)
+    by_userhash(:key => userhash).select { |t| t.name.include?(query) }
+  end
+  
 end

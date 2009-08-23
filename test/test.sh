@@ -28,3 +28,9 @@ sleep 1 # For delicious
 curl -b tmp/cookies.txt \
      -H 'Accept: application/json' \
      http://$host/$username/tags
+
+sleep 1 # For delicious
+
+curl -b tmp/cookies.txt \
+     -H 'Accept: application/json' \
+     http://$host/$username/tags/search?q=css
