@@ -23,6 +23,7 @@ TagBetter.App =
 	
 	ID_FOR_LOGOUT:                 'logout',
 	ID_FOR_FORGET:                 'forget',
+	IDLE_KEYPRESS_TIME_BEFORE_RUNNING_QUERY: 500, // time in ms
 	
 	/*
 		Example object within this array:
@@ -124,8 +125,25 @@ TagBetter.App =
 					on the query that's in the search box
 		*/
 		
-		TagBetter.Network.getTags($.trim(event.target.value));
+		var self = this;
+		var query = $.trim(event.target.value);
+		
+		// This way, the ajax query/filter is run 500 ms
+		// aftert the last key was pressed
+		
+		window.clearTimeout(this.keyEventTimeout);
+		
+		this.keyEventTimeout = window.setTimeout(function()
+		{
+			self.sendFilterQuery(query);
+		}, this.IDLE_KEYPRESS_TIME_BEFORE_RUNNING_QUERY);
+	
 	},
+	
+		sendFilterQuery: function(query)
+		{
+			TagBetter.Network.getTags(query);
+		},
 
 	/* Bundle bits
 	   ---------------------------------------------------------------- */
@@ -369,6 +387,8 @@ TagBetter.Network =
 {
 	mostRecentQuery: null, // initialize
 	
+	isRunningQuery: false, // initialize
+	
 	getBundles: function()
 	{
 		$.ajax(
@@ -391,6 +411,16 @@ TagBetter.Network =
 	
 	getTags: function(query)
 	{
+		// Help prevent race conditions
+		if (this.isRunningQuery)
+		{
+			return;
+		}
+		else
+		{
+			this.isRunningQuery = true;
+		}
+		
 		var data = {}; // initialize
 		
 		if (typeof query == "undefined")
@@ -412,6 +442,8 @@ TagBetter.Network =
 				q: query
 			};
 		}
+		
+		var self = this;
 		
 		$.ajax(
 		{
@@ -435,6 +467,8 @@ TagBetter.Network =
 					
 					TagBetter.App.buildTagList();
 				}
+				
+				self.isRunningQuery = false;
 			}
 		});
 		
