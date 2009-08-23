@@ -12,7 +12,7 @@ html {
 	background-repeat: repeat-y;
 	
 	font-size: 100%;
-	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -20,6 +20,7 @@ body {
 }
 
 form,
+p,
 ol,
 ul {
 	margin-bottom: 20px;
@@ -28,6 +29,7 @@ ul {
 h1 {
 	margin-bottom: 20px;
 	
+	font-size: 20px;
 	font-weight: bold;
 }
 
@@ -40,7 +42,10 @@ a:focus,
 a:hover,
 a:active {
 	color: black;
-	
+}
+
+a:focus,
+a:active {
 	outline: 1px dotted black;
 }
 
@@ -75,6 +80,12 @@ small {
 #header a:link,
 #header a:visited {
 	color: white;
+}
+
+#header a:focus,
+#header a:hover,
+#header a:active {
+	color: black;
 }
 
 #header h1 {
