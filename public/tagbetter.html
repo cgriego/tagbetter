@@ -61,9 +61,20 @@
 		</section><!-- /#primary-content -->
 	</div><!-- /#content -->
 
-	<!-- (scripts at bottom: http://developer.yahoo.com/performance/rules.html#js_bottom) -->	
-	<script src="behavior/jquery.min.js" type="text/javascript"></script>
-	<script src="behavior/global.js" type="text/javascript"></script>
+	<!-- (scripts at bottom: http://developer.yahoo.com/performance/rules.html#js_bottom) -->
+	
+	<script type="text/javascript">
+		TagBetter_Config = 
+		{
+			getBundlesURI:  "http://blah-blah",
+			getTagsURI:     "http://blah-blah",
+			
+			postBundlesURI: "http://blah-blah",
+		}
+	</script>
+	
+	<script type="text/javascript" src="behavior/jquery.min.js"></script>
+	<script type="text/javascript" src="behavior/global.js"></script>
 	
 </body>
 </html>
