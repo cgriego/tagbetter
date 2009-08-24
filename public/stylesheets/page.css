@@ -105,6 +105,10 @@ small {
 	font-size: 24px;
 }
 
+#header h1 a {
+	text-decoration: none;
+}
+
 #header nav {
 	float: right;
 	
