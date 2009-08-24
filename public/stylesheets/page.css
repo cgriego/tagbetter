@@ -163,8 +163,13 @@ small {
 	color: white;
 	background-color: rgb(50,116,208); /* Mariner Blue */
 	
+	border-radius:         12px;
 	-moz-border-radius:    12px;
-	-webkit-border-radius: 12px;
+	/* iPhone doesn't support shorthand */
+	-webkit-border-top-left-radius:     12px;
+	-webkit-border-top-right-radius:    12px;
+	-webkit-border-bottom-left-radius:  12px;
+	-webkit-border-bottom-right-radius: 12px;
 	
 	font-style: normal;
 }
