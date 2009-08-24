@@ -356,15 +356,19 @@ TagBetter.App =
 	
 	logout: function() 
 	{
-    $('body').append("<form id='forget' method='POST' action='/forget'></form>");
-    $('#forget')[0].submit();
-    return;
+		$('body').append("<form id='forget-form' method='POST' action='/forget'></form>");
+		
+		window.setTimeout(function() {
+			$('#forget-form')[0].submit();
+		}, 0);
 	},
 	
 	forget: function() {
-	  $('body').append("<form id='purge' method='POST' action='/purge'></form>");
-    $('#purge')[0].submit();
-    return;
+		$('body').append("<form id='purge-form' method='POST' action='/purge'></form>");
+		
+		window.setTimeout(function() {
+			$('#purge-form')[0].submit();
+		}, 0);
 	}
 };
 
