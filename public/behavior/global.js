@@ -23,7 +23,6 @@ TagBetter.App =
 	
 	ID_FOR_LOGOUT:                 'logout',
 	ID_FOR_FORGET:                 'forget',
-	IDLE_KEYPRESS_TIME_BEFORE_RUNNING_QUERY: 500, // time in ms
 	
 	/*
 		Example object within this array:
@@ -125,19 +124,9 @@ TagBetter.App =
 					on the query that's in the search box
 		*/
 		
-		var self = this;
 		var query = $.trim(event.target.value);
 		
-		// This way, the ajax query/filter is run 500 ms
-		// aftert the last key was pressed
-		
-		window.clearTimeout(this.keyEventTimeout);
-		
-		this.keyEventTimeout = window.setTimeout(function()
-		{
-			TagBetter.Network.getTags(query);
-		}, this.IDLE_KEYPRESS_TIME_BEFORE_RUNNING_QUERY);
-	
+		TagBetter.Network.getTags(query);
 	},
 
 
@@ -151,7 +140,7 @@ TagBetter.App =
 			return false;
 		}
 		else
-		{			
+		{
 			for (var i=0, len = this.currentlySelectedBundle.tags.length; i < len; i++)
 			{
 				if (this.currentlySelectedBundle.tags[i] == tag)
@@ -166,7 +155,7 @@ TagBetter.App =
 	},
 	
 	setSelectedBundle: function(bundleName)
-	{	
+	{
 		for (var i=0, len = this.bundles.length; i < len; i++)
 		{
 			if (this.bundles[i].name == bundleName)
@@ -179,7 +168,7 @@ TagBetter.App =
 	},
 	
 	updateTagCountOnSelectedBundle: function()
-	{		
+	{
 		$('#' + this.ID_FOR_BUNDLES_LIST + ' li.' + this.CLASSNAME_FOR_SELECTED_BUNDLE)
 			.find('em').text(this.currentlySelectedBundle.tags.length);
 	},
@@ -277,7 +266,7 @@ TagBetter.App =
 	{
 		if (!this.currentlySelectedBundle)
 		{
-			return null;
+			return;
 		}
 		
 		var tag = $(listItemElement).text();
@@ -407,16 +396,6 @@ TagBetter.Network =
 	
 	getTags: function(query)
 	{
-		// Help prevent race conditions
-		if (this.isRunningQuery)
-		{
-			return;
-		}
-		else
-		{
-			this.isRunningQuery = true;
-		}
-		
 		var data = {}; // initialize
 		
 		if (typeof query == "undefined")
@@ -429,6 +408,12 @@ TagBetter.Network =
 			return;
 		}
 		
+		// Help prevent race conditions
+		if (this.mostRecentAjax)
+		{
+			this.mostRecentAjax.abort();
+		}
+		
 		this.mostRecentQuery = query;
 		
 		if (query.length)
@@ -438,10 +423,16 @@ TagBetter.Network =
 				q: query
 			};
 		}
+		else if (TagBetter.App.allTags.length)
+		{
+			TagBetter.App.viewableTags = TagBetter.App.allTags;
+			TagBetter.App.buildTagList();
+			return;
+		}
 		
 		var self = this;
 		
-		$.ajax(
+		this.mostRecentAjax = $.ajax(
 		{
 			type:     'GET',
 			cache:    'false',
@@ -451,16 +442,13 @@ TagBetter.Network =
 			success:   function(jsonResult)
 			{
 				if (jsonResult.tags)
-				{	
-					TagBetter.App.viewableTags = jsonResult.tags;
-					
-					// If the query was for getting all tags, update
-					// the allTags variable too
-					if (typeof query == "undefined" | !query.length)
-					{
-						TagBetter.App.allTags = jsonResult.tags;
-					}
-					
+				{
+					TagBetter.App.allTags = TagBetter.App.viewableTags = jsonResult.tags;
+					TagBetter.App.buildTagList();
+				}
+				else if (jsonResult.results)
+				{
+					TagBetter.App.viewableTags = jsonResult.results;
 					TagBetter.App.buildTagList();
 				}
 				
