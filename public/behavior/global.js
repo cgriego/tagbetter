@@ -42,9 +42,11 @@ TagBetter.App =
 	
 	initialize: function()
 	{
-		TagBetter.Network.getTags(); // blank query
-		
-		TagBetter.Network.getBundles();
+		if ($('#' + this.ID_FOR_BUNDLES_LIST).length && $('#' + this.ID_FOR_TAGS_LIST).length) {
+			TagBetter.Network.getTags(); // blank query
+			
+			TagBetter.Network.getBundles();
+		}
 		
 		$(document.documentElement).bind('click', this.processClicks, this);
 		
