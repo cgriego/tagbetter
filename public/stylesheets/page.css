@@ -184,6 +184,10 @@ small {
 	background-color: rgb(50,116,208); /* Mariner Blue */
 }
 
+#tag-bundles li.selected.empty a em {
+	color: rgb(203,79,77); /* Chestnut Rose */
+}
+
 #tag-bundles li.selected a em {
 	color:            black;
 	border-color:     white;

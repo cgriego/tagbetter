@@ -6,6 +6,7 @@ if (typeof TagBetter == "undefined")
 TagBetter.App = 
 {
 	ID_FOR_BUNDLES_FORM:       'new-bundle-form',
+	ID_FOR_NEW_BUNDLE_NAME:    'new-bundle-name',
 	ID_FOR_TAG_FILTER_TEXTBOX: 'filter-tags-q',
 	
 	// Bundle-related constants
@@ -41,13 +42,15 @@ TagBetter.App =
 	
 	initialize: function()
 	{
-		TagBetter.Network.getTags(""); // blank query
+		TagBetter.Network.getTags(); // blank query
 		
 		TagBetter.Network.getBundles();
 		
 		$(document.documentElement).bind('click', this.processClicks, this);
 		
 		$('#' + this.ID_FOR_TAG_FILTER_TEXTBOX).bind('keyup', this.processKeyEvents, this);
+		
+		$('#' + this.ID_FOR_BUNDLES_FORM).bind('submit', this.processCreateBundleSubmit, this);
 	},
 	
 	/* Event Handlers
@@ -128,8 +131,18 @@ TagBetter.App =
 		
 		TagBetter.Network.getTags(query);
 	},
-
-
+	
+	processCreateBundleSubmit: function(event)
+	{
+		event.preventDefault();
+		
+		var name = $.trim($('#' + this.ID_FOR_NEW_BUNDLE_NAME).val());
+		
+		if (this.createBundle(name)) {
+			this.buildBundleList();
+		}
+	},
+	
 	/* Bundle bits
 	   ---------------------------------------------------------------- */
 	
@@ -169,8 +182,35 @@ TagBetter.App =
 	
 	updateTagCountOnSelectedBundle: function()
 	{
-		$('#' + this.ID_FOR_BUNDLES_LIST + ' li.' + this.CLASSNAME_FOR_SELECTED_BUNDLE)
-			.find('em').text(this.currentlySelectedBundle.tags.length);
+		var li = $('#' + this.ID_FOR_BUNDLES_LIST + ' li.' + this.CLASSNAME_FOR_SELECTED_BUNDLE),
+		count = this.currentlySelectedBundle.tags.length;
+		
+		li.find('em').text(count);
+		
+		if (count) {
+			li.removeClass(this.CLASSNAME_FOR_EMPTY_BUNDLE);
+		} else {
+			li.addClass(this.CLASSNAME_FOR_EMPTY_BUNDLE);
+		}
+	},
+	
+	createBundle: function(bundleName)
+	{
+		if (bundleName) {
+			for (var i=0, len = this.bundles.length; i < len; i++)
+			{
+				if (this.bundles[i].name == bundleName)
+				{
+					return false; // duplicate
+				}
+			}
+			
+			var bundle = { name: bundleName, tags: [] };
+			this.bundles.push(bundle);
+			return bundle;
+		} else {
+			return false;
+		}
 	},
 	
 	/* This adds a given tag to the currently selected bundle:
@@ -348,7 +388,7 @@ TagBetter.App =
 					break;
 			}
 			
-			bundleListMarkup.push('<li><a class="' + className + '" href="#"><span>' + currentBundle.name + '</span> <em>' + tagCount + '</em></a></li>\n');
+			bundleListMarkup.push('<li class="' + className + '"><a href="#"><span>' + currentBundle.name + '</span> <em>' + tagCount + '</em></a></li>\n');
 		}
 		
 		$('#' + this.ID_FOR_BUNDLES_LIST).html( bundleListMarkup.join('') );
@@ -469,7 +509,7 @@ TagBetter.Network =
 		data += '{';
 		data += '"name": "' + bundle.name.replace('"', '\"') + '"';
 		
-		if (bundle.tags.length) {
+		// if (bundle.tags.length) {
 			data += ', "tags": [';
 			tags = [];
 			
@@ -479,7 +519,7 @@ TagBetter.Network =
 			
 			data += tags.join(', ');
 			data += ']';
-		}
+		// }
 		
 		data += '}';
 		

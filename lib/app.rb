@@ -43,7 +43,7 @@ class TagBetter::App < Sinatra::Base
          session[:username], 
          session[:password])
       TagBetter::Bundle.clear(userhash)
-      status 202
+      status 204
     else
       status 400
     end
