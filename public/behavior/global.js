@@ -138,9 +138,11 @@ TagBetter.App =
 	{
 		event.preventDefault();
 		
-		var name = $.trim($('#' + this.ID_FOR_NEW_BUNDLE_NAME).val());
+		var input = $('#' + this.ID_FOR_NEW_BUNDLE_NAME),
+		name = $.trim(input.val());
 		
 		if (this.createBundle(name)) {
+			input.val("");
 			this.buildBundleList();
 		}
 	},
