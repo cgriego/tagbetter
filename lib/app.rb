@@ -56,7 +56,9 @@ class TagBetter::App < Sinatra::Base
   end
   
   get '/tags/search', :provides => 'application/json' do
-    {:results => TagBetter::Tag.search(userhash, params[:q])}.to_json
+    results = TagBetter::Tag.search(userhash, params[:q])
+    results = results.sort_by { |t| t.name.downcase }
+    {:results => results}.to_json
   end
   
   post '/purge' do
