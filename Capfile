@@ -2,12 +2,11 @@ load('deploy')
 
 set :application, "tagbetter"
 set :domain,      "tagbetter.r09.railsrumble.com"
-set :repository,  'git@github.com:railsrumble/rr09-team-208.git'
+set :repository,  'git@github.com:cgriego/tagbetter.git'
 set :use_sudo,    false
 set :deploy_to,   "/apps/#{application}"
 set :scm,         "git"
 set :user,        'deploy'
-set :branch,      'railsrumble09'
 
 role :app, domain
 
@@ -44,6 +43,15 @@ namespace :tagbetter do
   desc "Create the CouchDB application database"
   task :create_db, :roles => :app do
     run "cd #{current_release} && rake couchdb:create"
+  end
+  
+end
+
+namespace :couchdb do
+  
+  desc "Start CouchDB"
+  task :start, :roles => :app do
+    sudo "/usr/local/bin/couchdb -b"
   end
   
 end
