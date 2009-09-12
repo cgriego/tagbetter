@@ -4,7 +4,14 @@ class TagBetter::App < Sinatra::Base
   
   enable :sessions
   
-  configure do
+  configure(:development) do
+    TagBetter.init
+  end
+  
+  configure(:test) do
+  end
+  
+  configure(:production) do
     TagBetter.init
   end
   

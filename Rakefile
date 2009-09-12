@@ -1,3 +1,12 @@
+require 'rake/testtask'
+
+task :default => [:test]
+
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.test_files = FileList['test/*_test.rb']
+end
+
 namespace :tagbetter do
   
   desc "Install gem dependencies"
@@ -5,6 +14,7 @@ namespace :tagbetter do
     gem_deps = %w{couchrest json rest-client sinatra nokogiri}
     sh "sudo gem install --no-ri --no-rdoc #{gem_deps.join(' ')}"
   end
+  
 end
 
 begin
@@ -29,8 +39,6 @@ begin
     end
     
   end
-
 rescue LoadError => e
   puts "Missing dependencies. `rake tagbetter:gems` to install them."
-  exit
 end
