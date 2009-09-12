@@ -24,6 +24,15 @@ class AppTest < Test::Unit::TestCase
       
     end
     
+    context 'forget' do
+      
+      should 'clear username and password stored in the session' do
+        post '/forget', {}, 
+          {'rack.session' => {:username => 'bob', :password => 'bob123'}}
+        assert last_request.env['rack.session'].empty?
+      end
+    end
+    
   end
   
   def app
