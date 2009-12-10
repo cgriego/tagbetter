@@ -9,3 +9,4 @@ ENV['RACK_ENV'] = 'test' # AKK: Wish there was a better way to do this
 require 'tag_better'
 require 'app'
 
+Dir.mkdir(File.join(File.dirname(__FILE__), '..', 'log'))
