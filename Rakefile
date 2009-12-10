@@ -12,7 +12,7 @@ namespace :tagbetter do
   desc "Install gem dependencies"
   task :gems do
     gem_deps = %w{couchrest json rest-client sinatra nokogiri}
-    sh "sudo gem install --no-ri --no-rdoc #{gem_deps.join(' ')}"
+    sh "gem install --no-ri --no-rdoc #{gem_deps.join(' ')}"
   end
   
 end
